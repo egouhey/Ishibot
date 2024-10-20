@@ -2,14 +2,14 @@
 #include <Adafruit_SSD1306.h>
 #include <ezButton.h> 
 
-#define nombreDePixelsEnLargeur 128         // Taille de l'écran OLED, en pixel, au niveau de sa largeur
-#define nombreDePixelsEnHauteur 64          // Taille de l'écran OLED, en pixel, au niveau de sa hauteur
-#define brocheResetOLED         -1          // Reset de l'OLED partagé avec l'Arduino (d'où la valeur à -1, et non un numéro de pin)
-#define adresseI2CecranOLED     0x3C        // Adresse de "mon" écran OLED sur le bus i2c (généralement égal à 0x3C ou 0x3D)
+#define nombreDePixelsEnLargeur     128         
+#define nombreDePixelsEnHauteur     64          
+#define brocheResetOLED             -1          
+#define adresseI2CecranOLED         0x3C        
 
-ezButton bouton1(25);                       //définition bouton 
-ezButton bouton2(26);                       //définition bouton
-ezButton bouton3(2);                       //définition bouton
+ezButton bouton1(25);                       
+ezButton bouton2(26);                       
+ezButton bouton3(2);                       
 
 bool state_bouton1;
 bool state_bouton2;
@@ -35,7 +35,7 @@ Adafruit_SSD1306 oled(nombreDePixelsEnLargeur, nombreDePixelsEnHauteur, &Wire, b
 void rectangle(int  x1, int  y1, int  x2, int  y2){
   for(int numeroLigne=y1 ; numeroLigne < y2 ; numeroLigne++) {
     for(int numeroColonne=x1 ; numeroColonne < x2 ; numeroColonne++) {
-      oled.drawPixel(numeroColonne, numeroLigne, WHITE);          // On demande l'allumage de chaque pixel, un à un, avec la commande : drawPixel(posX,posY,couleur);
+      oled.drawPixel(numeroColonne, numeroLigne, WHITE);          
     }
   }
 } 
@@ -45,7 +45,7 @@ void init_ecran(){
   oled.clearDisplay();
   for(int numeroLigne=0 ; numeroLigne < nombreDePixelsEnHauteur ; numeroLigne++) {
     for(int numeroColonne=0 ; numeroColonne < nombreDePixelsEnLargeur ; numeroColonne++) {
-      oled.drawPixel(numeroColonne, numeroLigne, WHITE);          // On demande l'allumage de chaque pixel, un à un, avec la commande : drawPixel(posX,posY,couleur);
+      oled.drawPixel(numeroColonne, numeroLigne, WHITE);          
     }
   }
   oled.display();
@@ -197,14 +197,12 @@ void setup() {
   bouton2.setDebounceTime(50);
   bouton3.setDebounceTime(50);
 
-  // Initialisation de l'écran OLED
   if(!oled.begin(SSD1306_SWITCHCAPVCC, adresseI2CecranOLED)){
     Serial.println("Erreur ecran");
   }
   Serial.println("1");
   init_ecran();
   Serial.println("2");
-  // xTaskCreate(task1, "Task 1", 2048, NULL, 1, &task1_handle);
   Serial.println("3");
 }
 
