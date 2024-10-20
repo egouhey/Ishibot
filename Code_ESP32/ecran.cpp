@@ -200,24 +200,10 @@ void setup() {
   if(!oled.begin(SSD1306_SWITCHCAPVCC, adresseI2CecranOLED)){
     Serial.println("Erreur ecran");
   }
-  Serial.println("1");
   init_ecran();
-  Serial.println("2");
-  Serial.println("3");
-}
-
-void loop() {
-
-  bouton1.loop();
-  state_bouton1 = bouton1.getState();
-
-
-  if(state_bouton1 == HIGH){
-    Serial.println("ON");
-  }
-  else{
-    Serial.println("OFF");
-  }
+  xTaskCreate(task1, "Task 1", 2048, NULL, 1, &task1_handle);
 
 }
+
+void loop() {}
 
