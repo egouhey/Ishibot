@@ -36,7 +36,6 @@ bool LIDAR::read_data(){
     this->currentbuffer->index++;
     if (this->currentbuffer->index == length_tab-1){
       this->swapBuffers();
-      // this->stop_interrupt();
       xTaskCreate(LIDAR::task_lidar, "task_lidar", 1024, this, 1, NULL);
       return true;
     }
@@ -52,7 +51,7 @@ void LIDAR::analyse_data(){
   }
   while(i<length_tab-48){
       if ( (this->previousbuffer->tab[i]==LIDAR_HEADER && this->previousbuffer->tab[i+1]==LIDAR_VER_SIZE) 
-      && (this->previousbuffer->tab[i+47]==LIDAR_HEADER && this->previousbuffer->tab[i+1+47]==LIDAR_VER_SIZE)){
+      && (this->previousbuffer->tab[i+LIDAR_PACKET_SIZE]==LIDAR_HEADER && this->previousbuffer->tab[i+1+LIDAR_PACKET_SIZE]==LIDAR_VER_SIZE)){
         int angle = (int) (0.01*(((this->previousbuffer->tab[i+5])<<8) + (this->previousbuffer->tab[i+4])));
         int distance = ((this->previousbuffer->tab[i+7])<<8) + (this->previousbuffer->tab[i+6]);
         if (20<distance && distance < 100){
@@ -69,7 +68,7 @@ void LIDAR::analyse_data(){
 void LIDAR::task_lidar(void *pvParameters){
   LIDAR *lidar = static_cast<LIDAR*>(pvParameters);
   lidar->analyse_data();
-  // lidar->start_interrupt();
+  vTaskDelay(pdMS_TO_TICKS(50)); // 50 millis secondes
   vTaskDelete(NULL);
 }
 
