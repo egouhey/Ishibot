@@ -1,6 +1,5 @@
 #include "kinematics.h"
 #include "motor.h"
-// #include "IMU.h"
 #include "screen.h"
 
 void yellow_game(){
@@ -57,7 +56,6 @@ void carre_game(){
     delay(100);
   }
 }
-
 
 void setup() {
   Serial.begin(115200);
