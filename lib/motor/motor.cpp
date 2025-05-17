@@ -3,17 +3,17 @@
 void setup_motor()
 {
   // motor 1
-  pinMode(enPin1, OUTPUT);    digitalWrite(enPin1, LOW);      
+  pinMode(enPin1, OUTPUT);    digitalWrite(enPin1, HIGH);      
   pinMode(stpPin1, OUTPUT);   digitalWrite(stpPin1, LOW);    
   pinMode(dirPin1, OUTPUT);   digitalWrite(dirPin1, LOW);    
 
   // motor 2
-  pinMode(enPin2, OUTPUT);    digitalWrite(enPin2, LOW);     
+  pinMode(enPin2, OUTPUT);    digitalWrite(enPin2, HIGH);     
   pinMode(stpPin2, OUTPUT);   digitalWrite(stpPin2, LOW);    
   pinMode(dirPin2, OUTPUT);   digitalWrite(dirPin2, LOW);  
 
   // motor 3
-  pinMode(enPin3, OUTPUT);    digitalWrite(enPin3, LOW);     
+  pinMode(enPin3, OUTPUT);    digitalWrite(enPin3, HIGH);     
   pinMode(stpPin3, OUTPUT);   digitalWrite(stpPin3, LOW);
   pinMode(dirPin3, OUTPUT);   digitalWrite(dirPin3, LOW); 
 }
@@ -121,6 +121,7 @@ int ReadEncoderMotor1()
 {
   const byte message[] = {0xe0,0x36,0x16}; 
   Serial1.write(message, sizeof(message));
+  vTaskDelay(pdMS_TO_TICKS(10));
   uint16_t motorData[8];                                   
   if (Serial1.available() > 0) 
   {

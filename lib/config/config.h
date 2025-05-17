@@ -17,6 +17,9 @@
 #define   stpPin3    18     
 #define   dirPin3    5      
 
+#define   RX_ENCODER    26              // encodeur
+#define   TX_ENCODER    27
+
 #define  pwmChannel_1 0                 // pwm channel used for motor
 #define  pwmChannel_2 2
 #define  pwmChannel_3 4
@@ -49,6 +52,9 @@
 /**************************************************
  * Lidar
  ****************************************************/
+
+#define RX_LIDAR 14
+#define TX_LIDAR 12
 
 /**************************************************
  * Actionneur

@@ -39,8 +39,10 @@ class LIDAR {
     void start_interrupt();
     /** * @brief Désactivation de l'interrupton */
     void stop_interrupt();
-  /** * @brief Port série associé au lidar */
+    /** * @brief Port série associé au lidar */
     HardwareSerial *lidarSerial;
+
+    bool stop = false;
 
   private:    
     /** * @brief Initialisation du port serie*/

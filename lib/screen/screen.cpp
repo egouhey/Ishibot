@@ -26,10 +26,10 @@ volatile bool flag_next=false;
 volatile bool flag_enter=false;
 volatile bool flag_menu=false;
 
+Adafruit_SSD1306 oled(nombreDePixelsEnLargeur, nombreDePixelsEnHauteur, &Wire, brocheResetOLED);
+
 
 TaskHandle_t task1_handle = NULL; 
-
-Adafruit_SSD1306 oled(nombreDePixelsEnLargeur, nombreDePixelsEnHauteur, &Wire, brocheResetOLED);
 
 void rectangle(int  x1, int  y1, int  x2, int  y2){
   for(int numeroLigne=y1 ; numeroLigne < y2 ; numeroLigne++) {
@@ -40,7 +40,10 @@ void rectangle(int  x1, int  y1, int  x2, int  y2){
 } 
 
 void init_ecran(){
-
+    if(!oled.begin(SSD1306_SWITCHCAPVCC, adresseI2CecranOLED)){
+    Serial.println("Erreur ecran");
+    return;
+  }
   oled.clearDisplay();
   for(int numeroLigne=0 ; numeroLigne < nombreDePixelsEnHauteur ; numeroLigne++) {
     for(int numeroColonne=0 ; numeroColonne < nombreDePixelsEnLargeur ; numeroColonne++) {
@@ -54,6 +57,9 @@ void init_ecran(){
   oled.clearDisplay();
   oled.display();
   delay(1000);
+  oled.setTextSize(2);
+  oled.setCursor(0,0);
+  oled.setTextColor(SSD1306_WHITE);
 }
 
 void menu(){
@@ -61,9 +67,9 @@ void menu(){
   if(choice_menu==4){ choice_menu=0;  }
   oled.clearDisplay();
 
-  oled.setTextSize(2);
-  oled.setCursor(0,0);
-  oled.setTextColor(SSD1306_WHITE);
+  // oled.setTextSize(2);
+  // oled.setCursor(0,0);
+  // oled.setTextColor(SSD1306_WHITE);
 
   oled.println("Coupe");
   oled.println("Position");
@@ -184,9 +190,6 @@ void IRAM_ATTR make_enter() {
 }
 
 void setup_screen() {
-  if(!oled.begin(SSD1306_SWITCHCAPVCC, adresseI2CecranOLED)){
-    Serial.println("Erreur ecran");
-  }
   init_ecran();
   menu();
 
@@ -280,3 +283,18 @@ void screen(){
 
   vTaskDelay(1);
 }
+
+void print_oled_GO(){
+  oled.setCursor(0,0);
+  oled.clearDisplay();
+  oled.println("GO");
+  oled.display();
+}
+
+void print_oled_STOP(){
+  oled.setCursor(0,0);
+  oled.clearDisplay();
+  oled.println("STOP");
+  oled.display();
+}
+

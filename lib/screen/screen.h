@@ -54,6 +54,10 @@ void IRAM_ATTR make_next();
 
 void screen();
 
+void print_oled_GO();
+
+void print_oled_STOP();
+
 
 #endif
 

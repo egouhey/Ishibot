@@ -59,6 +59,7 @@ void LIDAR::analyse_data(){
           Serial.println(angle);
           Serial.print("distance = ");
           Serial.println(distance);
+          this->stop=true;
         }
       }
       i++;
