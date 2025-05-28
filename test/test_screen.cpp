@@ -4,9 +4,12 @@
 
 void setup() {
   Serial.begin(115200);
-  setup_screen();
+  init_ecran();
+  // setup_screen();
 }
 
 void loop() {
-  screen();
+  // screen();
+  print_oled_Position(400, -4000, 40);
+  vTaskDelay(2000/portTICK_PERIOD_MS);
 }

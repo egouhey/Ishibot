@@ -5,17 +5,17 @@
  * Motor Declaration
  ****************************************************/
 
-#define   enPin1     15                 // motor 1   
-#define   stpPin1    2      
-#define   dirPin1    0 
+#define   enPin2     15                 // motor 1   
+#define   stpPin2    2      
+#define   dirPin2    0 
 
-#define   enPin2     4                  // motor 2   
-#define   stpPin2    16     
-#define   dirPin2    17  
+#define   enPin3     4                  // motor 2   
+#define   stpPin3    16     
+#define   dirPin3    17  
 
-#define   enPin3     19                 // motor 3   
-#define   stpPin3    18     
-#define   dirPin3    5      
+#define   enPin1     19                 // motor 3   
+#define   stpPin1    18     
+#define   dirPin1    5      
 
 #define   RX_ENCODER    26              // encodeur
 #define   TX_ENCODER    27
@@ -26,7 +26,7 @@
 
 #define resolution_pwm 8                    // resolution of pwm duty cycle
 
-#define granularity 100                 // granularity of motor speed granularity control     
+#define granularity 10                 // granularity of motor speed granularity control     
 
 /**************************************************
  * Motor Control
@@ -54,7 +54,7 @@
  ****************************************************/
 
 #define RX_LIDAR 14
-#define TX_LIDAR 12
+#define TX_LIDAR 255
 
 /**************************************************
  * Actionneur

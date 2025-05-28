@@ -22,7 +22,12 @@ void Lidar_start_interrupt(LIDAR *lidar){
 }
 
 void LIDAR::start_interrupt(){
+  while (this->lidarSerial->available() > 0) {
+    char c = this->lidarSerial->read();
+  }
+  this->lidarSerial->flush();
   Lidar_start_interrupt(this);
+  // lidarSerial->flush();
 }
 
 void LIDAR::stop_interrupt(){
@@ -54,12 +59,13 @@ void LIDAR::analyse_data(){
       && (this->previousbuffer->tab[i+LIDAR_PACKET_SIZE]==LIDAR_HEADER && this->previousbuffer->tab[i+1+LIDAR_PACKET_SIZE]==LIDAR_VER_SIZE)){
         int angle = (int) (0.01*(((this->previousbuffer->tab[i+5])<<8) + (this->previousbuffer->tab[i+4])));
         int distance = ((this->previousbuffer->tab[i+7])<<8) + (this->previousbuffer->tab[i+6]);
-        if (20<distance && distance < 100){
-          Serial.print("angle = ");
-          Serial.println(angle);
-          Serial.print("distance = ");
-          Serial.println(distance);
+        if (180<distance && distance < 250){
+          // Serial.print("angle = ");
+          // Serial.println(angle);
+          // Serial.print("distance = ");
+          // Serial.println(distance);
           this->stop=true;
+          return;
         }
       }
       i++;

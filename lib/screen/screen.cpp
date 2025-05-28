@@ -298,3 +298,29 @@ void print_oled_STOP(){
   oled.display();
 }
 
+void print_oled_Position(float x, float y, float w){
+  int a=(int)round(x);
+  int b=(int)round(y);
+  int c=(int)round(w);
+  oled.setCursor(0,0);
+  oled.clearDisplay();
+
+  oled.print("X = ");
+  char X_1[20]; 
+  sprintf(X_1, "%d", a);
+  oled.println(X_1);
+
+  oled.print("Y = ");
+  char Y_1[20]; 
+  sprintf(Y_1, "%d", b);
+  oled.println(Y_1);
+
+  oled.print("W = ");
+  char W_1[20]; 
+  sprintf(W_1, "%d", c);
+  oled.println(W_1);
+
+  oled.display();
+}
+
+

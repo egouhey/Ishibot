@@ -13,8 +13,8 @@ void setup() {
 
 void loop() {
   // control_motor_speed(5, LOW, 0, LOW, 0, LOW);
-  encoder=ReadEncoderMotor1();
-  Serial.println(encoder-last_encoder);
+  // encoder=ReadEncoderMotor1();
+  // Serial.println(encoder-last_encoder);
   // vTaskDelay(pdMS_TO_TICKS(5));
   // while (encoder-last_encoder<65535){
   //   encoder=ReadEncoderMotor1();

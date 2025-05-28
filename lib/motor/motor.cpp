@@ -38,15 +38,16 @@ void setup_control_motor()
 
 void control_motor_speed( uint32_t freq_1, bool dir_1, uint32_t freq_2, bool dir_2, uint32_t freq_3, bool dir_3)
 {
+
+    // control direction
+  digitalWrite(dirPin1, dir_1);
+  digitalWrite(dirPin2, dir_2);
+  digitalWrite(dirPin3, dir_3);
+
   // control speed
   ledcWriteTone(pwmChannel_1, granularity*freq_1);
   ledcWriteTone(pwmChannel_2, granularity*freq_2);
   ledcWriteTone(pwmChannel_3, granularity*freq_3);
-
-  // control direction
-  digitalWrite(dirPin1, dir_1);
-  digitalWrite(dirPin2, dir_2);
-  digitalWrite(dirPin3, dir_3);
 }
 
 void control_motor_position(int step_motor1, int step_motor2, int step_motor3,int time)
@@ -75,9 +76,9 @@ void control_motor_position(int step_motor1, int step_motor2, int step_motor3,in
     digitalWrite(dirPin3, HIGH); 
   }
 
-  uint32_t freq_1 = 250*step_motor1/time;
-  uint32_t freq_2 = 250*step_motor2/time;
-  uint32_t freq_3 = 250*step_motor3/time;
+  uint32_t freq_1 = 500*step_motor1/time;
+  uint32_t freq_2 = 500*step_motor2/time;
+  uint32_t freq_3 = 500*step_motor3/time;
 
   ledcWriteTone(pwmChannel_1,freq_1);
   ledcWriteTone(pwmChannel_2,freq_2);

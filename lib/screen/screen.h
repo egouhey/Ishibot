@@ -58,6 +58,8 @@ void print_oled_GO();
 
 void print_oled_STOP();
 
+void print_oled_Position(float x, float y, float W);
+
 
 #endif
 
