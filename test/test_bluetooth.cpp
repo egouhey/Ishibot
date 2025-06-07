@@ -1,6 +1,7 @@
 #include "BluetoothSerial.h"
 #include "All.h"
 
+
 String device_name = "ESP32-BT-Slave";
 
 BluetoothSerial SerialBT;

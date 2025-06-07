@@ -26,7 +26,7 @@
 
 #define resolution_pwm 8                    // resolution of pwm duty cycle
 
-#define granularity 10                 // granularity of motor speed granularity control     
+#define granularity 1                 // granularity of motor speed granularity control     
 
 /**************************************************
  * Motor Control

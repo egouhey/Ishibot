@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 #include <screen.h>
+#include <circular_buffer.h>
 #include <esp32-hal-ledc.h> 
 #include <cmath>
 #include <config.h>
@@ -11,7 +12,8 @@
 #include <freertos/task.h>
 #include <freertos/semphr.h>
 
-const float r_robot =   162.253;
+// const float r_robot =   127.253;
+const float r_robot =   123.0;
 const float r_wheel =   30.0;
 // const float rstep   =  360/65536;
 
@@ -54,15 +56,16 @@ class ROBOT{
 
     Position  objectif_world;
     Position  position_world;
+    Position  delta;
     Speed     speed_world;
     Speed     speed_local;
     Omni      omni;
     SemaphoreHandle_t mutex_position;
 
     int ReadEncoderMotor(int addr_motor);
-    int addr_motor_1 = 0xe1;
-    int addr_motor_2 = 0xe2;
-    int addr_motor_3 = 0xe3;
+    const int addr_motor_1 = 0xe1;
+    const int addr_motor_2 = 0xe2;
+    const int addr_motor_3 = 0xe3;
     HardwareSerial *robotSerial;
 
     private:
@@ -75,24 +78,29 @@ class ROBOT{
     const unsigned long baudrate = 115200;   
     const int read_step_per_turn = 65536; 
 
-    int interval=100;
+    const float interval=50.0; // attention changer aussi speed ramp
 
-    float Kp_l = 3.5;
     // float Kp_r = 0.003;
-    float Kp_r = 0.01;
+    const float Kp_l = 3.0;
+    const float Kp_r = 3.0;
 
-    int previous_speed_1=0;
-    int previous_speed_2=0;
-    int previous_speed_3=0;
+    // CIRCULAR_BUFFER c_buffer_x;
+    // CIRCULAR_BUFFER c_buffer_y;
+    // CIRCULAR_BUFFER c_buffer_a;
+    // float Ki_l = 0.0;
+    // float Ki_r = 0.0;
 
-    int step_ramp=5;
-    float max_speed_motor=1000.0;
-    float tresh_l = 100.0;
-    float tresh_r = 1.0;
+    const float max_speed_motor=200.0;
+    const float tresh_l = 200.0;
+    const float tresh_r = 200.0;
+    
+    const float max_speed_world=100.0;
+    float previous_speed_x=0.0;
+    float previous_speed_y=0.0;
+    float previous_speed_w=0.0;
+    const float speed_ramp = 100.0*((50)/(1000.0));
 
-    // void wheel2position(int step_motor_1, int step_motor_2, int step_motor_3);
-    // int position2wheel(float moveX, float moveY, float movetheta);
-    // void asserv_robot();
+
 };
 
 float cos_deg(float theta);
@@ -102,5 +110,7 @@ float sin_deg(float theta);
 float min_float(float a, float b);
 
 float max_float(float a, float b);
+
+float norme_carre(float a, float b);
 
 #endif

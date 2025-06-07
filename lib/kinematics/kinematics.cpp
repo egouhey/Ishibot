@@ -33,7 +33,7 @@ void move_regular_old(float x, float y){
     if(y<0){
         y=-y;
     }
-    control_motor_position(step1, step2, step3, (15*(x+y) ));
+    control_motor_position(3*step1, 3*step2, 3*step3, (15*(x+y) ));
 }
 
 
